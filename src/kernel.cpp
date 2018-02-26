@@ -22,7 +22,7 @@ unsigned int nModifierSwitchTime  = 1413763200;    // Mon, 20 Oct 2014 00:00:00 
 unsigned int nModifierTestSwitchTime = 1397520000; // Tue, 15 Apr 2014 00:00:00 GMT
 
 // Note: user must upgrade before the protocol switch deadline, otherwise it's required to
-//   re-download the blockchain. The timestamp of upgrade is recorded in the blockchain
+//   re-download the blockchain. The timestamp of upgrade is recorded in the blockchain 
 //   database.
 unsigned int nModifierUpgradeTime = 0;
 
@@ -179,7 +179,7 @@ static bool SelectBlockFromCandidates(vector<pair<int64_t, uint256> >& vSortedBy
 // selected block of a given block group in the past.
 // The selection of a block is based on a hash of the block's proof-hash and
 // the previous stake modifier.
-// Stake modifier is recomputed at a fixed time interval instead of every
+// Stake modifier is recomputed at a fixed time interval instead of every 
 // block. This is to make it difficult for an attacker to gain control of
 // additional bits in the stake modifier, even after generating a chain of
 // blocks.
@@ -351,7 +351,7 @@ bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64_t& nStakeModifier)
 //                  future proof-of-stake at the time of the coin's confirmation
 //   txPrev.block.nTime: prevent nodes from guessing a good timestamp to
 //                       generate transaction for future advantage
-//   txPrev.offset: offset of txPrev inside block, to reduce the chance of
+//   txPrev.offset: offset of txPrev inside block, to reduce the chance of 
 //                  nodes generating coinstake at the same time
 //   txPrev.nTime: reduce the chance of nodes generating coinstake at the same
 //                 time
@@ -410,7 +410,7 @@ bool CheckStakeKernelHash(uint32_t nBits, const CBlock& blockFrom, uint32_t nTxP
     if (fDebug && !fPrintProofOfStake)
     {
         printf("CheckStakeKernelHash() : using modifier 0x%016" PRIx64 " at height=%d timestamp=%s for block from height=%d timestamp=%s\n",
-            nStakeModifier, nStakeModifierHeight,
+            nStakeModifier, nStakeModifierHeight, 
             DateTimeStrFormat(nStakeModifierTime).c_str(),
             mapBlockIndex[hashBlockFrom]->nHeight,
             DateTimeStrFormat(blockFrom.GetBlockTime()).c_str());
@@ -477,9 +477,8 @@ bool CheckProofOfStake(const CTransaction& tx, unsigned int nBits, uint256& hash
     CTransaction txPrev;
     CTxIndex txindex;
     if (!txPrev.ReadFromDisk(txdb, txin.prevout, txindex))
-    if (fDebug)
-            return tx.DoS(1, error("CheckProofOfStake() : INFO: read txPrev failed"));  // previous transaction not in main chain, may occur during initial download
-       return error;
+        return tx.DoS(1, error("CheckProofOfStake() : INFO: read txPrev failed"));  // previous transaction not in main chain, may occur during initial download
+
 #ifndef USE_LEVELDB
     txdb.Close();
 #endif
