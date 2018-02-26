@@ -286,7 +286,7 @@ bool isObscured(QWidget *w)
 
 void openDebugLogfile()
 {
-    boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
+    boost::filesystem::path pathDebug = GetDataDir();
 
     /* Open debug.log with the associated application */
     if (boost::filesystem::exists(pathDebug))
@@ -494,7 +494,7 @@ HelpMessageBox::HelpMessageBox(QWidget *parent) :
     addButton("OK", QMessageBox::RejectRole);   //кнопка OK будет справа от кнопки "Скрыть подробности"
     //addButton("OK", QMessageBox::NoRole);     //кнопка OK будет слева от кнопки "Скрыть подробности"
     setMouseTracking(true);
-    setSizeGripEnabled(true);   
+    setSizeGripEnabled(true);
 }
 
 void HelpMessageBox::printToConsole()
@@ -536,4 +536,3 @@ QString formatDurationStr(int secs)
 }
 
 } // namespace GUIUtil
-
