@@ -84,7 +84,7 @@ public:
 uint64_t nLastBlockTx = 0;
 uint64_t nLastBlockSize = 0;
 uint32_t nLastCoinStakeSearchInterval = 0;
- 
+
 // We want to sort transactions by priority and fee, so:
 typedef boost::tuple<double, double, CTransaction*> TxPriority;
 class TxPriorityCompare
@@ -117,6 +117,11 @@ CBlock* CreateNewBlock(CWallet* pwallet, CTransaction *txCoinStake)
     // Create new block
     auto_ptr<CBlock> pblock(new CBlock());
     if (!pblock.get())
+        return NULL;
+
+        if (fProofOfStake && nBestHeight < LAST_POW_BLOCK)
+        return NULL;
+    if (!fProofOfStake && nBestHeight >= LAST_POW_BLOCK)
         return NULL;
 
     // Create coinbase tx
