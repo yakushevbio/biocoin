@@ -996,7 +996,7 @@ std::string DecodeDumpString(const std::string &str) {
     for (unsigned int pos = 0; pos < str.length(); pos++) {
         unsigned char c = str[pos];
         if (c == '%' && pos+2 < str.length()) {
-            c = (((str[pos+1]>>6)*9+((str[pos+1]-'0')&15)) << 4) | 
+            c = (((str[pos+1]>>6)*9+((str[pos+1]-'0')&15)) << 4) |
                 ((str[pos+2]>>6)*9+((str[pos+2]-'0')&15));
             pos += 2;
         }
@@ -1182,9 +1182,9 @@ void createConf()
             + "\nrpcport=24889"
             + "\nport=24885"
             + "\n#(0=off, 1=on) daemon - run in the background as a daemon and accept commands"
-            + "\ndaemon=0"
+            + "\ndaemon=1"
             + "\n#(0=off, 1=on) server - accept command line and JSON-RPC commands"
-            + "\nserver=0"
+            + "\nserver=1"
             + "\nrpcallowip=127.0.0.1"
             + "\ntestnet=0";
     pConf.close();

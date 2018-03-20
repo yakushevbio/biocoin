@@ -35,7 +35,6 @@ namespace Checkpoints
           ( 70000, std::make_pair(uint256("0x12b3c6f8b58c55f8072ee1e3b78c23fc1dec2428efc97a02d24e0a218145d32d"), 1512639317) )
           ( 80000, std::make_pair(uint256("0x1ec41ea3dfd70888555f1f17f93f2d8d90b80dddc56117e3209e917d739bdabe"), 1514838673) )
           ( 90000, std::make_pair(uint256("0xd7fd95fc5e63270be7c1675a9a64ea8816f01d1f3afdc697656e48980bb06e07"), 1516979330) )
-          ( 100000, std::make_pair(uint256("0xc571b699db6c22eba506cc28ea89feaed8da6af3639279949b6fe09193a23ea8"), 1519161904) )
          ;
 
     // TestNet has no checkpoints
@@ -209,7 +208,7 @@ namespace Checkpoints
         return false;
     }
 
-    // Automatically select a suitable sync-checkpoint 
+    // Automatically select a suitable sync-checkpoint
     uint256 AutoSelectSyncCheckpoint()
     {
         const CBlockIndex *pindex = pindexBest;
@@ -254,7 +253,7 @@ namespace Checkpoints
             return false;
         if (hashBlock == hashPendingCheckpoint)
             return true;
-        if (mapOrphanBlocks.count(hashPendingCheckpoint) 
+        if (mapOrphanBlocks.count(hashPendingCheckpoint)
             && hashBlock == WantedByOrphan(mapOrphanBlocks[hashPendingCheckpoint]))
             return true;
         return false;

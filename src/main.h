@@ -710,8 +710,8 @@ public:
         @param[in] pvChecks	NULL If pvChecks is not NULL, script checks are pushed onto it instead of being performed inline.
         @return Returns true if all checks succeed
      */
-    bool ConnectInputs(CTxDB& txdb, MapPrevTx inputs, std::map<uint256, CTxIndex>& mapTestPool, const CDiskTxPos& posThisTx, const CBlockIndex* pindexBlock, 
-                     bool fBlock, bool fMiner, bool fScriptChecks=true, 
+    bool ConnectInputs(CTxDB& txdb, MapPrevTx inputs, std::map<uint256, CTxIndex>& mapTestPool, const CDiskTxPos& posThisTx, const CBlockIndex* pindexBlock,
+                     bool fBlock, bool fMiner, bool fScriptChecks=true,
                      unsigned int flags=STRICT_FLAGS, std::vector<CScriptCheck> *pvChecks = NULL);
     bool ClientConnectInputs();
     bool CheckTransaction() const;
@@ -957,11 +957,11 @@ public:
     // ppcoin: entropy bit for stake modifier if chosen by modifier
     unsigned int GetStakeEntropyBit(unsigned int nHeight) const
     {
-        // Take last bit of block hash as entropy bit
-        unsigned int nEntropyBit = (GetHash().Get64()) & (uint64_t)1;
-        if (fDebug && GetBoolArg("-printstakemodifier"))
-            printf("GetStakeEntropyBit: nTime=%u hashBlock=%s nEntropyBit=%u\n", nTime, GetHash().ToString().c_str(), nEntropyBit);
-        return nEntropyBit;
+      // Take last bit of block hash as entropy bit
+       unsigned int nEntropyBit = ((GetHash().Get64()) & 1ULL);
+       if (fDebug && GetBoolArg("-printstakemodifier"))
+           printf("GetStakeEntropyBit: nTime=%u hashBlock=%s nEntropyBit=%u\n", nTime, GetHash().ToString().c_str(), nEntropyBit);
+       return nEntropyBit;
     }
 
     // ppcoin: two types of block: proof-of-work or proof-of-stake
@@ -1158,7 +1158,7 @@ public:
     int64_t nMoneySupply;
 
     uint32_t nFlags;  // ppcoin: block index flags
-    enum  
+    enum
     {
         BLOCK_PROOF_OF_STAKE = (1 << 0), // is proof-of-stake block
         BLOCK_STAKE_ENTROPY  = (1 << 1), // entropy bit for stake modifier
@@ -1356,7 +1356,7 @@ public:
             pprev, pnext, nFile, nBlockPos, nHeight,
             FormatMoney(nMint).c_str(), FormatMoney(nMoneySupply).c_str(),
             GeneratedStakeModifier() ? "MOD" : "-", GetStakeEntropyBit(), IsProofOfStake()? "PoS" : "PoW",
-            nStakeModifier, nStakeModifierChecksum, 
+            nStakeModifier, nStakeModifierChecksum,
             hashProofOfStake.ToString().c_str(),
             prevoutStake.ToString().c_str(), nStakeTime,
             hashMerkleRoot.ToString().c_str(),

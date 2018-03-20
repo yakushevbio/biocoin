@@ -1018,7 +1018,7 @@ uint32_t pnSeed[] =
     0x8ac59754, 0xbca6fa64, 0xb23ee33c
 };
 
-const char* pchTorSeed[] = 
+const char* pchTorSeed[] =
 {};
 
 void DumpAddresses()

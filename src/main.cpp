@@ -2475,15 +2475,12 @@ bool static IsCanonicalBlockSignature(CBlock* pblock)
 
 bool ProcessBlock(CNode* pfrom, CBlock* pblock)
 {
-    // Check for duplicate
-    uint256 hash = pblock->GetHash();
-    if (mapBlockIndex.count(hash)) {
-         if (fDebug)
-             return error("ProcessBlock() : already have block %d %s", mapBlockIndex[hash]->nHeight, hash.ToString().substr(0,20).c_str());
-         return error;
-     }
-    if (mapOrphanBlocks.count(hash))
-        return error("ProcessBlock() : already have block (orphan) %s", hash.ToString().substr(0,20).c_str());
+  // Check for duplicate
+ uint256 hash = pblock->GetHash();
+ if (mapBlockIndex.count(hash))
+     return error("ProcessBlock() : already have block %d %s", mapBlockIndex[hash]->nHeight, hash.ToString().substr(0,20).c_str());
+ if (mapOrphanBlocks.count(hash))
+     return error("ProcessBlock() : already have block (orphan) %s", hash.ToString().substr(0,20).c_str());
 
     // Check proof-of-stake
     // Limited duplicity on stake: prevents block flood attack
